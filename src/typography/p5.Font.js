@@ -126,7 +126,7 @@ p5.Font.prototype.textBounds = function(str, x, y, fontSize, options) {
 
         var gm = glyph.getMetrics();
 
-        if (glyph.name !== 'space') {
+        if (glyph.name !== 'space' && glyph.unicode !== 32) {
 
           xCoords.push(gX + (gm.xMax * scale));
           yCoords.push(gY + (-gm.yMin * scale));
@@ -199,16 +199,19 @@ p5.Font.prototype.textToPoints = function(txt, x, y, fontSize, options) {
 
   for (var i = 0; i < glyphs.length; i++) {
 
-    var gpath = glyphs[i].getPath(x, y, fontSize),
-      paths = splitPaths(gpath.commands);
+    if (glyphs[i].name !== 'space') { // fix to #1817
 
-    for (var j = 0; j < paths.length; j++) {
+      var gpath = glyphs[i].getPath(x, y, fontSize),
+        paths = splitPaths(gpath.commands);
 
-      var pts = pathToPoints(paths[j], options);
+      for (var j = 0; j < paths.length; j++) {
 
-      for (var k = 0; k < pts.length; k++) {
-        pts[k].x += xoff;
-        result.push(pts[k]);
+        var pts = pathToPoints(paths[j], options);
+
+        for (var k = 0; k < pts.length; k++) {
+          pts[k].x += xoff;
+          result.push(pts[k]);
+        }
       }
     }
 

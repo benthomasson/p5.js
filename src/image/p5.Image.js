@@ -133,7 +133,7 @@ p5.Image = function(width, height){
    * Before accessing this array, the data must loaded with the loadPixels()
    * function. After the array data has been modified, the updatePixels()
    * function must be run to update the changes.
-   * @property pixels[]
+   * @property {Number[]} pixels
    * @example
    * <div>
    * <code>
@@ -274,7 +274,7 @@ p5.Image.prototype.updatePixels = function(x, y, w, h){
  * @param  {Number}               [y] y-coordinate of the pixel
  * @param  {Number}               [w] width
  * @param  {Number}               [h] height
- * @return {Array/Color | p5.Image}     color of pixel at x,y in array format
+ * @return {Array|Color|p5.Image}     color of pixel at x,y in array format
  *                                    [R, G, B, A] or p5.Image
  * @example
  * <div><code>
@@ -468,7 +468,7 @@ p5.Image.prototype.copy = function () {
 
 /**
  * Masks part of an image from displaying by loading another
- * image and using it's blue channel as an alpha channel for
+ * image and using it's alpha channel as an alpha channel for
  * this image.
  *
  * @method mask

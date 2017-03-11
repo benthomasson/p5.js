@@ -135,7 +135,7 @@ p5.prototype.focused = (document.hasFocus());
  * be less than the dimensions of the image.
  *
  * @method cursor
- * @param {Number/Constant} type either ARROW, CROSS, HAND, MOVE, TEXT, or
+ * @param {Number|Constant} type either ARROW, CROSS, HAND, MOVE, TEXT, or
  *                               WAIT, or path for image
  * @param {Number}          [x]  the horizontal active spot of the cursor
  * @param {Number}          [y]  the vertical active spot of the cursor
@@ -170,7 +170,8 @@ p5.prototype.cursor = function(type, x, y) {
       // https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
       coords = x + ' ' + y;
     }
-    if (type.substring(0, 6) !== 'http://') {
+    if ((type.substring(0, 7) === 'http://') ||
+        (type.substring(0, 8) === 'https://')) {
       // Image (absolute url)
       cursor = 'url(' + type + ') ' + coords + ', auto';
     } else if (/\.(cur|jpg|jpeg|gif|png|CUR|JPG|JPEG|GIF|PNG)$/.test(type)) {
@@ -192,7 +193,8 @@ p5.prototype.cursor = function(type, x, y) {
  * recommended. The default rate is 60 frames per second. This is the same as
  * setFrameRate(val).
  * <br><br>
- * Calling frameRate() with no arguments returns the current framerate. This
+ * Calling frameRate() with no arguments returns the current framerate. The
+ * draw function must run at least once before it will return a value. This
  * is the same as getFrameRate().
  * <br><br>
  * Calling frameRate() with arguments that are not of the type numbers

@@ -77,7 +77,7 @@ var frames = [];
  * var pink = color(255, 102, 204);
  * img = createImage(66, 66);
  * img.loadPixels();
- * var d = pixelDensity;
+ * var d = pixelDensity();
  * var halfImage = 4 * (width * d) * (height/2 * d);
  * for (var i = 0; i < halfImage; i+=4) {
  *   img.pixels[i] = red(pink);
@@ -107,10 +107,10 @@ p5.prototype.createImage = function(width, height) {
  *  file immediately, or prompt the user with a dialogue window.
  *
  *  @method saveCanvas
- *  @param  {[selectedCanvas]} canvas a variable representing a
+ *  @param  {Canvas} [selectedCanvas] a variable representing a
  *                             specific html5 canvas (optional)
- *  @param  {[String]} filename
- *  @param  {[String]} extension 'jpg' or 'png'
+ *  @param  {String} [filename]
+ *  @param  {String} [extension] 'jpg' or 'png'
  *  @example
  *  <div class='norender'><code>
  *  function setup() {
